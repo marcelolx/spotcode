@@ -1,0 +1,43 @@
+version: "3.4"
+
+x-base: &base
+  build:
+    context: .
+    dockerfile: Dockerfile
+  tty: true
+  restart: on-failure
+  image: spotcode
+  volumes:
+    - .:/app/
+    - vendor:/app/vendor
+    - node:/app/node_modules/
+    - cache:/app/cache
+  environment:
+    - PGHOST=host.docker.internal
+    - PGUSER
+    - PGPASSWORD
+    - DISABLE_SPRING
+    - SPROCKETS_CACHE=/cache
+
+services:
+  spotcode:
+    <<: *base
+    ports:
+      - "3005:3000"
+    container_name: spotcode
+    command: /bin/sh -c "RAILS_ENV=development rails s -b 0.0.0.0"
+
+  spotcode-webpack:
+    <<: *base
+    ports:
+      - "3035:3035"
+    container_name: spotcode-webpack
+    command: /bin/sh -c "RAILS_ENV=development webpack-dev-server"
+
+volumes:
+  vendor:
+    driver: local
+  node:
+    driver: local
+  cache:
+    driver: local
