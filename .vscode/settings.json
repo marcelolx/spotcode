@@ -1,0 +1,16 @@
+{
+  "ruby.intellisense": "rubyLocate",
+  "ruby.useBundler": true,
+  "ruby.useLanguageServer": false,
+  "ruby.lint": {
+    "rubocop": {
+      "useBundler": true
+    },
+    "reek": {
+      "useBundler": true
+    }
+  },
+  "solargraph.useBundler": true,
+  "ruby.specCommand": "NO_COVERAGE=1 ./bin/rspec",
+  "ruby.specSaveFile": true
+}
