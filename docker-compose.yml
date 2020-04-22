@@ -23,7 +23,7 @@ services:
   spotcode:
     <<: *base
     ports:
-      - "3005:3000"
+      - "5000:3000"
     container_name: spotcode
     command: /bin/sh -c "RAILS_ENV=development rails s -b 0.0.0.0"
 
